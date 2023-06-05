@@ -1,0 +1,6 @@
+{
+    "files.autoGuessEncoding": false,
+    "cSpell.enableFiletypes": [
+        "!python"
+    ]
+}

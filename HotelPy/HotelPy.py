@@ -1,3 +1,4 @@
+from model import *
 
 def reservar(rsvEdfc, rsvAnd, rsvQat, quartosReservados, listaDeReservas):
     reservado = True
@@ -10,13 +11,28 @@ def reservar(rsvEdfc, rsvAnd, rsvQat, quartosReservados, listaDeReservas):
     listaDeReservas.append(listaAuxiliar)
     
     return (quartosReservados, listaDeReservas)
-    
-hotel = [[[ False for quartos in range(5)] for andares in range(5)] for edificios in range(3)]
+
+def salvarCliente():
+    cliente = cliente
+    return (cliente)
+hotel = [[[ False for _ in range(5)] for _ in range(5)] for _ in range(3)]
 #print(hotel)
 print()
 
-qtdReservar = int(input("Olá, quantos quartos deseja reservar hoje? "))
+telefone1 = telefone()
+telefone2 = telefone()
 
+cliente1 = cliente()
+cliente2 = cliente()
+
+telefone1.cliente = cliente1
+telefone1.numero = '11 980557686'
+
+telefone2.cliente = cliente2
+telefone2.numero = '11 656689874'
+
+
+qtdReservar = int(input("Olá, quantos quartos deseja reservar hoje? "))
 quartosReservados = ["Edifício:", 0, "Andar:", 0, "Quarto:", 0]
 listaDeReservas = []
 reservados = 0
@@ -43,5 +59,7 @@ while loop < qtdReservar:
     loop+=1
     
 print("Quartos reservados: ")
-print(listaDeReservas)
+for i in listaDeReservas:
+    print(i)
+    
 

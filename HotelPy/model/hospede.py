@@ -1,12 +1,13 @@
-
+from model.cliente import Cliente
+from model.quarto import Quarto
+from model.telefone import Telefone
 from datetime import date
 
 class Hospede:
     def __init__(self):
         self._cliente = ""
+        self._telefoneCliente = None
         self._quarto = 0
-        self._andar = 0
-        self._edificio = 0
         self._dataEntrada = None
         self._dataVencimento = None
         self._dataSaida = None
@@ -14,26 +15,20 @@ class Hospede:
     def getCliente(self):
         return self._cliente
     
-    def setCliente(self, cliente):
+    def setCliente(self, cliente: Cliente):
         self._cliente = cliente
+    
+    def getTelefoneCliente(self):
+        return self._telefoneCliente
+    
+    def setTelefoneCliente(self, telefoneCliente: Telefone):
+        self._telefoneCliente = telefoneCliente
     
     def getQuarto(self):
         return self._quarto
     
-    def setQuarto(self, quarto):
+    def setQuarto(self, quarto: Quarto):
         self._quarto = quarto
-    
-    def getAndar(self):
-        return self._andar
-    
-    def setAndar(self, andar):
-        self._andar = andar
-    
-    def getEdificio(self):
-        return self._edificio
-    
-    def setEdificio(self, edificio):
-        self._edificio = edificio
     
     def getDataEntrada(self):
         return self._dataEntrada

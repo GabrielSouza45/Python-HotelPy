@@ -2,7 +2,6 @@ class Cliente:
     def __init__(self):
         self._nome = ""
         self._cpf = ""
-        self._telefone = ""
         self._email = ""
         
     def getNome(self):

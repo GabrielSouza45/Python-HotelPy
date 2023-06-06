@@ -19,17 +19,18 @@ hotel = [[[ False for _ in range(5)] for _ in range(5)] for _ in range(3)]
 #print(hotel)
 print()
 
-telefone1 = telefone()
-telefone2 = telefone()
+telefone1 = telefone.Telefone()
+telefone2 = telefone.Telefone()
 
-cliente1 = cliente()
-cliente2 = cliente()
+cliente1 = cliente.Cliente()
+cliente2 = cliente.Cliente()
 
 telefone1.cliente = cliente1
 telefone1.numero = '11 980557686'
 
-telefone2.cliente = cliente2
+telefone2.cliente = cliente1
 telefone2.numero = '11 656689874'
+
 
 
 qtdReservar = int(input("Olá, quantos quartos deseja reservar hoje? "))

@@ -1,8 +1,11 @@
-from model import cliente
+from model.cliente import Cliente
 
-def cadastrarCliente():
-    cliente1 = cliente.Cliente()
-    cliente1.setNome(input("Digite seu nome: "))
-    cliente1.setEmail(input("Digite seu email: "))
-    cliente1.setCpf(input("Digite seu CPF: "))
-    return cliente1
+class ClienteService:
+    def cadastrarCliente(self, nome, cpf, email):
+        # sourcery skip: inline-immediately-returned-variable
+        cliente = Cliente()
+        cliente.setNome(nome)
+        cliente.setCpf(cpf)
+        cliente.setEmail(email)
+        
+        return cliente

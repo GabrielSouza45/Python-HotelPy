@@ -1,7 +1,11 @@
-from model import *
+from model.telefone import Telefone
 
-def cadastrarTelefoneCliente(cliente):
-    telefone1 = telefone.Telefone()
-    telefone1.setCliente = cliente
-    telefone1.setNumero = input("Digite seu telefone: ")
-    return(telefone1)
+class TelefoneService:
+    def cadastrarTelefone(self, numero, cliente, edificio):
+        # sourcery skip: inline-immediately-returned-variable
+        telefone = Telefone()
+        telefone.setNumero(numero)
+        telefone.setCliente(cliente if cliente != None else None)
+        telefone.setEdificio(edificio if edificio != None else None)
+        
+        return telefone

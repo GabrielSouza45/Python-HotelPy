@@ -1,0 +1,1 @@
+__all__ = ['cliente', 'edificio', 'endereco', 'hospede', 'quarto', 'telefone']

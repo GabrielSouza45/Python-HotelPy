@@ -1,25 +1,20 @@
 from model import *
+from model.quarto import Quarto
 from service import *
 from controller import *
 
-def reservar(rsvEdfc, rsvAnd, rsvQat, quartosReservados, listaDeReservas):
-    reservado = True
+quarto_controller = quartoController.QuartoController()
+cliente_controller = clienteController.ClienteController()
+telefone_service = telefoneController.TelefoneController()
+endereco_controller = enderecoController.EnderecoController()
 
+def reservar(rsvEdfc, rsvAnd, rsvQat):
+    reservado = True
     hotel[rsvEdfc - 1][rsvAnd - 1][rsvQat - 1] = reservado
-    quartosReservados[1] = (rsvEdfc)
-    quartosReservados[3] = (rsvAnd)
-    quartosReservados[5] = (rsvQat)
-    
-    quarto_controller = quartoController.QuartoController()
-    
-    quarto = quarto_controller.cadastrarQuarto(rsvQat, rsvAnd, rsvEdfc)
-    
-    listaAuxiliar = quartosReservados[:]
-    listaDeReservas.append(listaAuxiliar)
-    return (quartosReservados, listaDeReservas)
+    quarto = quarto_controller.cadastrarQuarto(rsvQat, rsvAnd, edificios[rsvEdfc-1])
+    quartos.append(quarto)
 
 def cadastraEndereco():
-    endereco_controller = enderecoController.EnderecoController()
     endereco1 = endereco_controller.cadastrarEndereco(
         "589648557", "Rua da marinha", "165", "RedLine", "São Paulo", "SP")
     
@@ -50,18 +45,14 @@ def cadastraEnderecoCliente():
 hotel = [[[ False for _ in range(5)] for _ in range(5)] for _ in range(3)] 
 #print(hotel)
 print()
-
-nome = input("Digite seu nome: ")
-cpf = input("Digite seu cpf: ")
-email = input("Digite seu email: ")
-numero = input("Digite seu telefone: ")
+# nome = input("Digite seu nome: ")
+# cpf = input("Digite seu cpf: ")
+# email = input("Digite seu email: ")
+# numero = input("Digite seu telefone: ")
 endereco = cadastraEnderecoCliente()
 
-cliente_controller = clienteController.ClienteController()
-telefone_service = telefoneController.TelefoneController()
-
-cliente = cliente_controller.cadastrarCliente(nome, cpf, email, endereco)
-telefoneCliente = telefone_service.cadastrarTelefone(numero, cliente, None)
+cliente = cliente_controller.cadastrarCliente("Gabriel Freitas Souza", "123", "souza@zousa.com", endereco)
+telefoneCliente = telefone_service.cadastrarTelefone("12345678988", cliente, None)
 
 print()
 print("Dados do cliente: \nNome: ", cliente.getNome())
@@ -97,8 +88,7 @@ print()
 qtdReservar = int(input("Olá {nome}, quantos quartos deseja reservar hoje? ".format(nome = primeiroNome)))
 
 
-quartosReservados = ["Edifício:", 0, "Andar:", 0, "Quarto:", 0]
-listaDeReservas = []
+quartos: list[Quarto] = []
 reservados = 0
 totalQuartos = len(hotel) * len(hotel[0]) * len(hotel[0][0])
 quartosDisponiveis = 0
@@ -118,13 +108,17 @@ while loop < qtdReservar:
         print("Desculpe, este quarto não está disponível no momento, tente algum outro.")
         continue
     
-    reservar(rsvEdfc, rsvAnd, rsvQat, quartosReservados, listaDeReservas)
+    reservar(rsvEdfc, rsvAnd, rsvQat)
     reservados += 1
     loop+=1
 
 print()
 print("Quartos reservados: ")
-for i in listaDeReservas:
-    print(i)
+for i in quartos:
+    print("Edifício: ",i.getEdificio().getNome())
+    print("Quarto: ",i.getNumero())
+    print("Andar: ",i.getAndar())
+    print()
+
 
 

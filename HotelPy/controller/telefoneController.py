@@ -1,5 +1,5 @@
 from service.telefoneService import TelefoneService
-class TelefoneService():
+class TelefoneController():
     def __init__(self):
         self.service = TelefoneService()
     

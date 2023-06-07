@@ -17,7 +17,7 @@ class Endereco:
         return self._rua
     
     def setRua(self, rua):
-        self.rua = rua 
+        self._rua = rua 
 
     def getNumero(self):
         return self._numero
@@ -35,7 +35,7 @@ class Endereco:
         return self._cidade
     
     def setCidade(self, cidade):
-        self.cidade = cidade
+        self._cidade = cidade
 
     def getEstado(self):
         return self._estado

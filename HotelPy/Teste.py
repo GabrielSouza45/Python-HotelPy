@@ -27,7 +27,7 @@ def cadastraEndereco():
         "123456789", "Rua dos almirantes", "190", "Navio 56", "São Jorge", "SP")
     
     endereco3 = endereco_controller.cadastrarEndereco(
-        "987654321", "Rua dos Chapéis de palha", "15b", "", "Thousand Sunny", "SP")
+        "987654321", "Rua dos Chapéus de palha", "15b", "Thousand Sunny", "Novo Mundo", "OP")
     return [endereco1, endereco2, endereco3]
     
 
@@ -40,6 +40,12 @@ def cadastraEdificio():
     
     return [edificio1, edificio2, edificio3]
 
+def cadastraEnderecoCliente():
+    end_controller = enderecoController.EnderecoController()
+    return end_controller.cadastrarEndereco(
+        "55668894", "Vale do Silício", "165", "Grajaú", "São Paulo", "SP")
+
+
 
 hotel = [[[ False for _ in range(5)] for _ in range(5)] for _ in range(3)] 
 #print(hotel)
@@ -49,12 +55,21 @@ nome = input("Digite seu nome: ")
 cpf = input("Digite seu cpf: ")
 email = input("Digite seu email: ")
 numero = input("Digite seu telefone: ")
+endereco = cadastraEnderecoCliente()
 
-cliente_service = clienteService.ClienteService()
-telefone_service = telefoneService.TelefoneService()
+cliente_controller = clienteController.ClienteController()
+telefone_service = telefoneController.TelefoneController()
 
-cliente = cliente_service.cadastrarCliente(nome, cpf, email)
-telefone = telefone_service.cadastrarTelefone(numero, cliente, None)
+cliente = cliente_controller.cadastrarCliente(nome, cpf, email, endereco)
+telefoneCliente = telefone_service.cadastrarTelefone(numero, cliente, None)
+
+print()
+print("Dados do cliente: \nNome: ", cliente.getNome())
+print("Telefone: ", telefoneCliente.getNumero())
+print("Rua: ", cliente.getEndereco().getRua())
+print("CEP: ", cliente.getEndereco().getCep())
+print("Bairro: ", cliente.getEndereco().getBairro())
+print("Cidade: ", cliente.getEndereco().getCidade())
 
 primeiroNome = cliente.getNome().split(None, 1)[0]
 
@@ -64,20 +79,17 @@ edificio2 = edificios[1]
 edificio3 = edificios[2]
 print()
 
-print("Edificio 1: ", edificio1.getNome())
-print("Localizacao: ")
+print("Edificios: \nEdificio 1: ", edificio1.getNome())
 print("Rua: ", edificio1.getEndereco().getRua())
 print("Cep: ", edificio1.getEndereco().getCep())
 print()
 
 print("Edificio 2: ", edificio2.getNome())
-print("Localizacao: ")
 print("Rua: ", edificio2.getEndereco().getRua())
 print("Cep: ", edificio2.getEndereco().getCep())
 print()
 
 print("Edificio 3: ", edificio3.getNome())
-print("Localizacao: ")
 print("Rua: ", edificio3.getEndereco().getRua())
 print("Cep: ", edificio3.getEndereco().getCep())
 print()
@@ -92,7 +104,6 @@ totalQuartos = len(hotel) * len(hotel[0]) * len(hotel[0][0])
 quartosDisponiveis = 0
 loop = 0
 
-print() 
 while loop < qtdReservar:
     quartosDisponiveis = totalQuartos - reservados 
     print()
